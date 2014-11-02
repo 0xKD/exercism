@@ -3,11 +3,14 @@
 
 (defn response-for [call]
   (if (str/blank? call) "Fine. Be that way!"
-    (if (= \? (.charAt call (- (.length call) 1))) "Sure."
-      (if (every? #(or (not (Character/isLetter %))
-                       (Character/isUpperCase %))
-              call) "Woah, chill out!" "Whatever."
-        )
+    (if (and (every? #(or (not (Character/isLetter %))
+                     (Character/isUpperCase %))
+                call)
+             (not (not-any? #(Character/isLetter %) call)))
+      "Woah, chill out!"
+      (if (= \? (.charAt call (- (.length call) 1))) "Sure."
+        "Whatever."
       )
     )
   )
+)
