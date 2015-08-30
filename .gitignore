@@ -58,3 +58,6 @@ target/
 
 # vim swap
 *.swp
+
+*.beam
+*.dump
